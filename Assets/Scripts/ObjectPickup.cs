@@ -73,13 +73,7 @@ public class ObjectPickup : MonoBehaviour
                 pickedUpObject.isPickedUp = false;
                 pickedUpObject = null;
 
-                /*pickedUpObject.transform.SetParent(null);
-                pickedUpObject.rb.simulated = true;
-                Vector3 v = cam.ScreenToWorldPoint(Input.mousePosition) - pickedUpObject.transform.position; 
-                pickedUpObject.rb.velocity = v * force;
-                pickedUpObject.isPickedUp = false;
-
-                pickedUpObject = null;*/
+              
             }
             
         }

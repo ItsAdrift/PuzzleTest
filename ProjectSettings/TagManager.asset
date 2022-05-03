@@ -8,6 +8,7 @@ TagManager:
   - player
   - map
   - level4_key_2
+  - level5_key
   layers:
   - Default
   - TransparentFX

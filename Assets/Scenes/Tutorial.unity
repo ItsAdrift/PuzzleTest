@@ -10241,7 +10241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animation: {fileID: 1519598501}
-  tag: level4_key_2
+  tag: level5_key
   OnButtonStateChangeEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -10372,7 +10372,7 @@ GameObject:
   - component: {fileID: 1527336488}
   m_Layer: 0
   m_Name: Key
-  m_TagString: level4_key_2
+  m_TagString: level5_key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

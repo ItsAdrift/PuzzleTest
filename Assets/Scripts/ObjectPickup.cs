@@ -7,6 +7,13 @@ public class ObjectPickup : MonoBehaviour
     [SerializeField] CharacterController2D controller;
 
     [SerializeField] Transform carry;
+    [SerializeField] Transform drop;
+
+    [Header("Drop Check")]
+    [SerializeField] LayerMask ground;
+    [SerializeField] Transform wallCheck;
+    [SerializeField] float radius = 1f;
+
     [SerializeField] float distance;
     [SerializeField] Transform check;
 
@@ -52,6 +59,20 @@ public class ObjectPickup : MonoBehaviour
             } else
             {
                 // Drop infront of the player
+
+                if (Physics2D.OverlapCircle(wallCheck.position, radius, ground))
+                    return;
+
+                pickedUpObject.transform.SetParent(null);
+                pickedUpObject.transform.position = drop.position;
+                pickedUpObject.rb.velocity = Vector2.zero;
+                pickedUpObject.rb.simulated = true;
+
+
+
+                pickedUpObject.isPickedUp = false;
+                pickedUpObject = null;
+
                 /*pickedUpObject.transform.SetParent(null);
                 pickedUpObject.rb.simulated = true;
                 Vector3 v = cam.ScreenToWorldPoint(Input.mousePosition) - pickedUpObject.transform.position; 
@@ -78,10 +99,6 @@ public class ObjectPickup : MonoBehaviour
             Vector3 currentPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             currentPoint.z = 15;
 
-            Debug.Log("LT IS null? " + lt == null);
-            Debug.Log("Start Point: " + startPoint);
-            Debug.Log("Current Point: " + currentPoint);
-
             lt.RenderLine(startPoint, currentPoint);
         }
 
@@ -95,6 +112,8 @@ public class ObjectPickup : MonoBehaviour
 
             force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x), Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y));
             pickedUpObject.rb.AddForce(force * power, ForceMode2D.Impulse);
+
+            lt.EndLine();
 
             pickedUpObject.isPickedUp = false;
             pickedUpObject = null;

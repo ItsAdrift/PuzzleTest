@@ -22,4 +22,10 @@ public class LineTrajectory : MonoBehaviour
 
         lr.SetPositions(points);
     }
+
+    public void EndLine()
+    {
+        lr.positionCount = 0;
+    }
+
 }

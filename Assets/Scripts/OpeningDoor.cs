@@ -6,11 +6,14 @@ public class OpeningDoor : MonoBehaviour
 {
     public Animation animation;
 
+    bool used;
+
     public void SetOpen(bool b)
     {
-        if (b)
+        if (b && !used)
         {
             animation.Play();
+            used = true;
         } /*else
         {
             animation.Rewind();

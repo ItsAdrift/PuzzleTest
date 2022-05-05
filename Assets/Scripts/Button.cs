@@ -8,6 +8,17 @@ public class Button : MonoBehaviour
     public Animation animation;
     public string tag;
 
+    [Header("Broken Particles")]
+    public ParticleSystem brokenParticles;
+    public int bursts;
+    public float burstRate;
+    public bool broken;
+    public float randMin = 1;
+    public float randMax = 3;
+
+    public Color repairedColour;
+
+
     [System.Serializable]
     public class BoolEvent : UnityEvent<bool> { }
 
@@ -16,6 +27,12 @@ public class Button : MonoBehaviour
     public BoolEvent OnButtonStateChangeEvent;
     public UnityEvent OnButtonPress;
     public UnityEvent OnButtonRelease;
+
+    void Start()
+    {
+        if (brokenParticles != null)
+            StartCoroutine(BurstForever());
+    }
 
     void Awake()
     {
@@ -29,7 +46,7 @@ public class Button : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == tag)
+        if (!broken && (tag == "" || collision.gameObject.tag == tag))
         {
             animation.Play();
             OnButtonStateChangeEvent.Invoke(true);
@@ -43,6 +60,29 @@ public class Button : MonoBehaviour
         {
             OnButtonStateChangeEvent.Invoke(false);
             OnButtonRelease.Invoke();
+        }
+    }
+
+    public void Repair()
+    {
+        broken = false;
+        gameObject.GetComponent<SpriteRenderer>().color = repairedColour;
+    }
+
+    IEnumerator BurstForever()
+    {
+        while (broken) // loop forever
+        {
+
+            int burstCount = bursts;
+            while (burstCount > 0) // burst of 5 shots
+            {
+                brokenParticles.Play();
+                burstCount--;
+                yield return new WaitForSeconds(burstRate);
+            }
+
+            yield return new WaitForSeconds(Random.Range(randMin, randMax));
         }
     }
 

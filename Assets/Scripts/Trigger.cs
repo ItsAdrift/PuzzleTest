@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Trigger : MonoBehaviour
 {
     [SerializeField] string tag;
+    [SerializeField] string disallowTag;
     [SerializeField] bool oneUse;
     [SerializeField] bool canExitIfOneUse = true;
 
@@ -27,10 +28,11 @@ public class Trigger : MonoBehaviour
         if (used)
             return;
 
-        if (collision.tag == tag)
+        if ((tag == "" && disallowTag == "") || (collision.tag == tag && collision.tag != disallowTag))
         {
             OnTriggerEnter.Invoke();
-            used = true;
+            if (oneUse)
+                used = true;
         }
     }
 

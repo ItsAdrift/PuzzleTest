@@ -22,6 +22,7 @@ public class ObjectPickup : MonoBehaviour
     [SerializeField] LineTrajectory lt;
 
     [SerializeField] float power;
+    [SerializeField] float yAdd;
     [SerializeField] Vector2 minPower;
     [SerializeField] Vector2 maxPower;
 
@@ -104,7 +105,7 @@ public class ObjectPickup : MonoBehaviour
             endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             endPoint.z = 15;
 
-            force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x), Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y));
+            force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x), Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y) + yAdd);
             pickedUpObject.rb.AddForce(force * power, ForceMode2D.Impulse);
 
             lt.EndLine();

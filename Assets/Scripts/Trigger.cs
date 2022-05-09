@@ -25,7 +25,7 @@ public class Trigger : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (used)
+        if (used && oneUse)
             return;
 
         if ((tag == "" && disallowTag == "") || (collision.tag == tag && collision.tag != disallowTag))

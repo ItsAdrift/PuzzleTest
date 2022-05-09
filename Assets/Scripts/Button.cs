@@ -56,7 +56,7 @@ public class Button : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == tag)
+        if (tag == "" || collision.gameObject.tag == tag)
         {
             OnButtonStateChangeEvent.Invoke(false);
             OnButtonRelease.Invoke();

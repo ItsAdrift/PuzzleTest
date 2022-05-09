@@ -6,6 +6,8 @@ public class CameraMovement : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 1f;
 
+    bool locked = false;
+
     private Vector3 targetPosition;
 
     void FixedUpdate()
@@ -18,8 +20,44 @@ public class CameraMovement : MonoBehaviour
 
     public void MoveTo(GameObject position)
     {
+        if (locked)
+            return;
+
         targetPosition = position.transform.position;
         targetPosition.z = -10;
+    }
+    
+    public void DelayedMoveTo(GameObject position, float delay)
+    {
+        StartCoroutine(Delay(position, delay));
+    }
+
+    public void FourSecondDelay(GameObject position)
+    {
+        DelayedMoveTo(position, 4);
+    }
+
+    /**
+     * Delays CamerMovement by delay seconds.
+     * Automatically Unlocks the camera.
+     */
+    IEnumerator Delay(GameObject position, float delay)
+    {
+
+        yield return new WaitForSeconds(delay);
+
+        Unlock();
+        MoveTo(position);
+    }
+
+    public void Lock()
+    {
+        locked = true;
+    }
+
+    public void Unlock()
+    {
+        locked = false;
     }
 
 }

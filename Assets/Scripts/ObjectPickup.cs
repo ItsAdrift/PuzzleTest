@@ -30,7 +30,7 @@ public class ObjectPickup : MonoBehaviour
     Vector3 startPoint;
     Vector3 endPoint;
 
-    MoveableObject pickedUpObject;
+    [HideInInspector] public MoveableObject pickedUpObject;
 
     void Update()
     {

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Fade : MonoBehaviour
 {
-    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] public SpriteRenderer spriteRenderer;
 
     [Header("Fade In")]
-    [SerializeField] float time;
+    [SerializeField] public float time;
     [SerializeField] float target;
     
     [Header("Ping Pong")]
@@ -15,6 +15,7 @@ public class Fade : MonoBehaviour
     [SerializeField] float pingpongTarget;
 
     bool fadeIn = false;
+    bool fadeOut = false;
     bool pingpong = false;
 
     private void Update()
@@ -22,7 +23,12 @@ public class Fade : MonoBehaviour
         if (fadeIn)
         {
             Color32 colour = spriteRenderer.color;
-            colour.a = (byte) Mathf.Lerp(colour.a, target, time * Time.deltaTime);
+            colour.a = (byte)Mathf.Lerp(colour.a, target, time * Time.deltaTime);
+            spriteRenderer.color = colour;
+        }
+        else if (fadeOut) {
+            Color32 colour = spriteRenderer.color;
+            colour.a = (byte)Mathf.Lerp(colour.a, 0, time * Time.deltaTime);
             spriteRenderer.color = colour;
         } else if (pingpong)
         {
@@ -32,15 +38,24 @@ public class Fade : MonoBehaviour
         }
     }
 
+    public void FadeOut() {
+        fadeOut = true;
+        fadeIn = false;
+        pingpong = false;
+
+    }
+
     public void FadeIn()
     {
         fadeIn = true;
         pingpong = false;
+        fadeOut = false;
     }
 
     public void PingPong()
     {
         fadeIn = false;
         pingpong = true;
+        fadeOut = false;
     }
 }

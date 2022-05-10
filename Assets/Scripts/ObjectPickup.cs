@@ -48,7 +48,9 @@ public class ObjectPickup : MonoBehaviour
                         {
                             obj.gameObject.transform.SetParent(carry);
                             obj.gameObject.transform.localPosition = new Vector3(0, 0, 0);
-                            obj.rb.simulated = false;
+
+                            if (obj.rb != null)
+                                obj.rb.simulated = false;
 
                             obj.isPickedUp = true;
 
@@ -65,21 +67,26 @@ public class ObjectPickup : MonoBehaviour
                     return;
 
                 pickedUpObject.transform.SetParent(null);
-                pickedUpObject.transform.position = drop.position;
-                pickedUpObject.rb.velocity = Vector2.zero;
-                pickedUpObject.rb.simulated = true;
 
+                Vector3 dropPos = drop.position;
+                dropPos.y += pickedUpObject.yOffset;
+                dropPos.x += pickedUpObject.xOffset;
+                pickedUpObject.transform.position = dropPos;
 
+                if (pickedUpObject.rb != null)
+                {
+                    pickedUpObject.rb.simulated = true;
+                    pickedUpObject.rb.velocity = Vector2.zero;
+                }
 
                 pickedUpObject.isPickedUp = false;
                 pickedUpObject = null;
 
-              
             }
             
         }
 
-        if (pickedUpObject == null)
+        if (pickedUpObject == null || !pickedUpObject.canThrow)
             return;
 
         if (Input.GetMouseButtonDown(0))
@@ -100,7 +107,8 @@ public class ObjectPickup : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             pickedUpObject.transform.SetParent(null);
-            pickedUpObject.rb.simulated = true;
+            if (pickedUpObject.rb != null)
+                pickedUpObject.rb.simulated = true;
 
             endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             endPoint.z = 15;

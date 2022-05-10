@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class OpeningDoor : MonoBehaviour
 {
+    public bool hasAnimation;
+    public float openOffset;
+    public float openSpeed = 1f;
     public Animation animation;
 
     bool used;
+    bool opening = false;
+    Vector3 target;
+
+    public void Update()
+    {
+        if (opening)
+            transform.position = Vector3.Lerp(transform.position, target, openSpeed * Time.deltaTime);
+    }
 
     public void SetOpen(bool b)
     {
         if (b && !used)
         {
-            animation.Play();
+            if (hasAnimation)
+            {
+                animation.Play();
+            } else
+            {
+                target = transform.position;
+                target.y = transform.position.y + openOffset;
+                opening = true;
+            }
+            
             used = true;
         } /*else
         {

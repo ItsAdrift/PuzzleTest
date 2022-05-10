@@ -7,8 +7,9 @@ TagManager:
   - key
   - player
   - map
-  - level4_key_2
-  - level5_key
+  - tutorial_4_key
+  - tutorial_5_key
+  - level1_key
   layers:
   - Default
   - TransparentFX

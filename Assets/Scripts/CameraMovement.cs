@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    [SerializeField] float movementSpeed = 1f;
+    [SerializeField] public float movementSpeed = 1f;
 
     bool locked = false;
 
@@ -58,6 +58,11 @@ public class CameraMovement : MonoBehaviour
     public void Unlock()
     {
         locked = false;
+    }
+
+    public void SetSpeed(float speed)
+    {
+        movementSpeed = speed;
     }
 
 }

@@ -47,7 +47,8 @@ public class ObjectPickup : MonoBehaviour
                         if (obj.canPickUp && !obj.isPickedUp)
                         {
                             obj.gameObject.transform.SetParent(carry);
-                            obj.gameObject.transform.localPosition = new Vector3(0, 0, 0);
+
+                            obj.gameObject.transform.localPosition = new Vector3(0, obj.yOffset, 0);
 
                             if (obj.rb != null)
                                 obj.rb.simulated = false;
@@ -69,8 +70,6 @@ public class ObjectPickup : MonoBehaviour
                 pickedUpObject.transform.SetParent(null);
 
                 Vector3 dropPos = drop.position;
-                dropPos.y += pickedUpObject.yOffset;
-                dropPos.x += pickedUpObject.xOffset;
                 pickedUpObject.transform.position = dropPos;
 
                 if (pickedUpObject.rb != null)

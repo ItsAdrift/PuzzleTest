@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class Button : MonoBehaviour
 {
     public Animation animation;
+    public bool oneUse = false;
+    bool used = false;
     public string tag;
 
     [Header("Broken Particles")]
@@ -48,9 +50,14 @@ public class Button : MonoBehaviour
     {
         if (!broken && (tag == "" || collision.gameObject.tag == tag))
         {
+            if (oneUse && used)
+                return;
+
             animation.Play();
             OnButtonStateChangeEvent.Invoke(true);
             OnButtonPress.Invoke();
+
+            used = true;
         }
     }
 

@@ -10,6 +10,7 @@ public class OpeningDoor : MonoBehaviour
     public Animation animation;
 
     bool used;
+    bool closed;
     bool opening = false;
     Vector3 target;
 
@@ -42,17 +43,29 @@ public class OpeningDoor : MonoBehaviour
 
     public void Close(int delay)
     {
+        if (closed)
+            return;
+
         StartCoroutine(_Close(delay));
     }
 
     private IEnumerator _Close(int delay)
     {
-        yield return new WaitForSeconds(delay);
-        
-        animation.Rewind();
-        animation.Play();
-        animation.Sample();
-        animation.Stop();
+        yield return new WaitForSeconds(delay);   
+
+        if (hasAnimation)
+        {
+            animation.Rewind();
+            animation.Play();
+            animation.Sample();
+            animation.Stop();
+        } else
+        {
+            target = transform.position;
+            target.y = transform.position.y - openOffset;
+        }
+
+        closed = true;
 
     }
 

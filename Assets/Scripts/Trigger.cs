@@ -41,7 +41,7 @@ public class Trigger : MonoBehaviour
         if (used && !canExitIfOneUse)
             return;
 
-        if (collision.tag == tag)
+        if (tag == "" || collision.tag == tag)
         {
             OnTriggerExit.Invoke();
         }

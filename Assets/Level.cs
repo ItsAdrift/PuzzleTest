@@ -7,6 +7,8 @@ public class Level : MonoBehaviour
     [SerializeField] GameObject[] objects;
     [SerializeField] Trigger exitTrigger;
 
+    bool objectsCleared = false;
+
     public void Start()
     {
         if (exitTrigger == null)
@@ -17,6 +19,9 @@ public class Level : MonoBehaviour
 
     public void ClearObjects()
     {
+        if (objectsCleared)
+            return;
+
         for (int i = 0; i < objects.Length; i++)
         {
             SpriteRenderer spritRenderer = objects[i].GetComponent<SpriteRenderer>();
@@ -33,6 +38,8 @@ public class Level : MonoBehaviour
             }
             Destroy(objects[i], 1);
         }
+
+        objectsCleared = true;
     }
 
     public void TriggerExit()

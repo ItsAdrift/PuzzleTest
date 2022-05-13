@@ -18,6 +18,7 @@ public class ObjectPickup : MonoBehaviour
     [SerializeField] Transform check;
 
     [Header("Throw")]
+    [SerializeField] bool dragBack = true;
     [SerializeField] Camera cam;
     [SerializeField] LineTrajectory lt;
 
@@ -88,6 +89,7 @@ public class ObjectPickup : MonoBehaviour
         if (pickedUpObject == null || !pickedUpObject.canThrow)
             return;
 
+        // Start throw
         if (Input.GetMouseButtonDown(0))
         {
             startPoint = cam.ScreenToWorldPoint(Input.mousePosition);
@@ -95,14 +97,16 @@ public class ObjectPickup : MonoBehaviour
             //Debug.Log(startPoint);
         }
 
+        // Drag Throw
         if (Input.GetMouseButton(0))
         {
             Vector3 currentPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             currentPoint.z = 15;
 
-            lt.RenderLine(startPoint, currentPoint);
+            lt.RenderLine(startPoint, currentPoint, dragBack);
         }
 
+        // Release Throw
         if (Input.GetMouseButtonUp(0))
         {
             pickedUpObject.transform.SetParent(null);
@@ -112,7 +116,15 @@ public class ObjectPickup : MonoBehaviour
             endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             endPoint.z = 15;
 
-            force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x), Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y) + yAdd);
+            if (dragBack)
+            {
+                force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x), Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y) + yAdd);
+            } else
+            {
+                force = new Vector2(Mathf.Clamp(endPoint.x - startPoint.x, minPower.x, maxPower.x), Mathf.Clamp(endPoint.y - startPoint.y, minPower.y, maxPower.y) + yAdd);
+            }
+
+            
             pickedUpObject.rb.AddForce(force * power, ForceMode2D.Impulse);
 
             lt.EndLine();

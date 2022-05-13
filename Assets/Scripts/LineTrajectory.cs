@@ -10,15 +10,22 @@ public class LineTrajectory : MonoBehaviour
     private void Awake()
     {
         lr = GetComponent<LineRenderer>();
-        Debug.Log(lr == null);
     }
 
-    public void RenderLine(Vector3 startPoint, Vector3 endPoint)
+    public void RenderLine(Vector3 startPoint, Vector3 endPoint, bool dragBack)
     {
         lr.positionCount = 2;
         Vector3[] points = new Vector3[2];
-        points[0] = startPoint;
-        points[1] = endPoint;
+        if (dragBack)
+        {
+            points[0] = startPoint;
+            points[1] = endPoint;
+        } else
+        {
+            points[0] = endPoint;
+            points[1] = startPoint;
+        }
+        
 
         lr.SetPositions(points);
     }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Gizmo : MonoBehaviour
 {
+    [SerializeField] Color color = Color.yellow;
     [SerializeField] bool enabled = true;
     [SerializeField] Vector2 size;
 
@@ -11,7 +12,7 @@ public class Gizmo : MonoBehaviour
     {
         if (!enabled)
             return;
-        Gizmos.color = Color.yellow;
+        Gizmos.color = color;
         Gizmos.DrawWireCube(transform.position, new Vector3(size.x, size.y, 0));
     }
 }

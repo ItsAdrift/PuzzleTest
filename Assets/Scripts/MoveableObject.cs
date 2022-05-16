@@ -10,5 +10,7 @@ public class MoveableObject: MonoBehaviour
     public float yOffset = 0f;
     public float xOffset = 0f;
 
+    public bool disableSimulation = true;
+
     [HideInInspector] public bool isPickedUp;
 }

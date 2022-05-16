@@ -52,7 +52,19 @@ public class ObjectPickup : MonoBehaviour
                             obj.gameObject.transform.localPosition = new Vector3(0, obj.yOffset, 0);
 
                             if (obj.rb != null)
-                                obj.rb.simulated = false;
+                            {
+                                if (obj.disableSimulation)
+                                {
+                                    obj.rb.simulated = false;
+                                }
+                                else
+                                {
+                                    obj.rb.bodyType = RigidbodyType2D.Kinematic;
+                                }
+                            }
+                            
+                            
+                                
 
                             obj.isPickedUp = true;
 
@@ -68,16 +80,22 @@ public class ObjectPickup : MonoBehaviour
                 if (Physics2D.OverlapCircle(wallCheck.position, radius, ground))
                     return;
 
+                if (pickedUpObject.rb != null)
+                {
+                    if (pickedUpObject.disableSimulation)
+                    {
+                        pickedUpObject.rb.simulated = true;
+                    } else
+                    {
+                        pickedUpObject.rb.bodyType = RigidbodyType2D.Dynamic;
+                    }
+                    pickedUpObject.rb.velocity = Vector2.zero;
+                }
+
                 pickedUpObject.transform.SetParent(null);
 
                 Vector3 dropPos = drop.position;
                 pickedUpObject.transform.position = dropPos;
-
-                if (pickedUpObject.rb != null)
-                {
-                    pickedUpObject.rb.simulated = true;
-                    pickedUpObject.rb.velocity = Vector2.zero;
-                }
 
                 pickedUpObject.isPickedUp = false;
                 pickedUpObject = null;
@@ -111,7 +129,16 @@ public class ObjectPickup : MonoBehaviour
         {
             pickedUpObject.transform.SetParent(null);
             if (pickedUpObject.rb != null)
-                pickedUpObject.rb.simulated = true;
+            {
+                if (pickedUpObject.disableSimulation)
+                {
+                    pickedUpObject.rb.simulated = true;
+                } else
+                {
+                    pickedUpObject.rb.bodyType = RigidbodyType2D.Dynamic;
+                }
+            }
+                
 
             endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             endPoint.z = 15;

@@ -56,7 +56,32 @@ public class Laser : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "player")
-            Debug.Log("ZZaapp");
+        {
+            PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
+            int count = player.gfx.childCount;
+            for (int i = 0; i < count; i++)
+            {
+                Transform child = player.gfx.GetChild(i);
+
+                if (child.GetComponent<Rigidbody2D>() != null)
+                    return;
+
+                child.gameObject.AddComponent<BoxCollider2D>();
+                Rigidbody2D rb = child.gameObject.AddComponent<Rigidbody2D>();
+                rb.velocity = player.controller.GetRigidbody().velocity;
+
+                if (child.name == "Head")
+                {
+                    Vector2 v = rb.velocity;
+                    v.y = 1;
+                    rb.velocity = v;
+                }
+
+                player.enabled = false;
+
+            }
+        }
+            
     }
 
     public void SetActive(bool b)

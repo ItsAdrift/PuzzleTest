@@ -25,6 +25,7 @@ public class CameraMovement : MonoBehaviour
 
         targetPosition = position.transform.position;
         targetPosition.z = -10;
+
     }
     
     public void DelayedMoveTo(GameObject position, float delay)

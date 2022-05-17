@@ -152,4 +152,9 @@ public class CharacterController2D : MonoBehaviour
 		return m_Rigidbody2D.velocity;
     }
 
+	public Rigidbody2D GetRigidbody()
+    {
+		return m_Rigidbody2D;
+    }
+
 }

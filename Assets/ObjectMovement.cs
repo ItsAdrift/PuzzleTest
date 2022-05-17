@@ -7,20 +7,21 @@ public class ObjectMovement : MonoBehaviour
     public float range;
     public float speed;
 
-    private Vector3 positionDisplacement;
-    private Vector3 positionOrigin;
-    private float _timePassed;
+    private float initial;
+    private float _range;
+
     private void Start()
     {
-        positionOrigin = transform.localPosition;
+        initial = transform.localPosition.x;
+        _range = UnityEngine.Random.Range(range, range);
     }
 
     private void Update()
     {
-        positionDisplacement = new Vector3(range, 0, -10);
-
-        _timePassed += Time.deltaTime;
-        transform.localPosition = Vector3.Lerp(positionOrigin, positionOrigin + positionDisplacement, Mathf.PingPong(_timePassed * speed, 1));
+        float x = Mathf.PingPong(Time.time * speed, _range);
+        Vector3 position = transform.localPosition;
+        position.x = initial + x;
+        transform.localPosition = position;
     }
 
 }

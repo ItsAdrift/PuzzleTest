@@ -38,7 +38,7 @@ public class Laser : MonoBehaviour
             obstructed = true;
 
             // Particles
-            particles.transform.position = hit.point;
+            particles.transform.position = hit.point - (direction * 0.1f);
             particles.Play();
         } else
         {
@@ -77,7 +77,8 @@ public class Laser : MonoBehaviour
                     rb.velocity = v;
                 }
 
-                player.enabled = false;
+                player.isEnabled = false;
+                player.Respawn();
 
             }
         }

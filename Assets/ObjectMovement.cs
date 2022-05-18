@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ObjectMovement : MonoBehaviour
 {
+    public bool leftRightMovement = true;
+
     public float range;
     public float speed;
 
@@ -12,15 +14,28 @@ public class ObjectMovement : MonoBehaviour
 
     private void Start()
     {
-        initial = transform.localPosition.x;
-        _range = UnityEngine.Random.Range(range, range);
+        if (leftRightMovement)
+        {
+            initial = transform.localPosition.x;
+        } else
+        {
+            initial = transform.localPosition.y;
+        }
+        //_range = UnityEngine.Random.Range(range, range);
     }
 
     private void Update()
     {
-        float x = Mathf.PingPong(Time.time * speed, _range);
+        float offset = Mathf.PingPong(Time.time * speed, range);
         Vector3 position = transform.localPosition;
-        position.x = initial + x;
+        if (leftRightMovement)
+        {
+            position.x = initial + offset;
+        } else
+        {
+            position.y = initial - offset;
+        }
+        
         transform.localPosition = position;
     }
 

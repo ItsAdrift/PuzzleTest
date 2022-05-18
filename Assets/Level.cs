@@ -6,6 +6,7 @@ public class Level : MonoBehaviour
 {
     [SerializeField] GameObject[] objects;
     [SerializeField] Trigger exitTrigger;
+    [SerializeField] Transform spawnPoint;
 
     bool objectsCleared = false;
 
@@ -46,4 +47,10 @@ public class Level : MonoBehaviour
     {
         ClearObjects();
     }
+
+    public Transform GetSpawnPoint()
+    {
+        return spawnPoint;
+    }
+
 }

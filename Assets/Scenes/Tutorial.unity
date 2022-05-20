@@ -2313,6 +2313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668e87f8868910143b3cb81cedccda1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oneUse: 0
   hasAnimation: 0
   openOffset: 2.81
   openSpeed: 2
@@ -18784,6 +18785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668e87f8868910143b3cb81cedccda1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oneUse: 0
   hasAnimation: 0
   openOffset: 3.85
   openSpeed: 2
@@ -20482,6 +20484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668e87f8868910143b3cb81cedccda1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oneUse: 0
   hasAnimation: 0
   openOffset: 2.81
   openSpeed: 2
@@ -21227,6 +21230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668e87f8868910143b3cb81cedccda1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oneUse: 0
   hasAnimation: 1
   openOffset: 0
   openSpeed: 1
@@ -28186,6 +28190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668e87f8868910143b3cb81cedccda1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oneUse: 0
   hasAnimation: 0
   openOffset: 3.5
   openSpeed: 2
@@ -29496,6 +29501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668e87f8868910143b3cb81cedccda1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oneUse: 0
   hasAnimation: 0
   openOffset: 2.81
   openSpeed: 2
@@ -29772,18 +29778,6 @@ MonoBehaviour:
   OnTriggerEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 519420030}
-        m_TargetAssemblyTypeName: CameraMovement, Assembly-CSharp
-        m_MethodName: MoveTo
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1716267208}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 144560935}
         m_TargetAssemblyTypeName: OpeningDoor, Assembly-CSharp
         m_MethodName: Close
@@ -29824,7 +29818,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 8.447727, y: 2.934743}
+  m_Offset: {x: 0.26026154, y: 1.9160752}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -29835,7 +29829,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 17.895454, y: 8.969179}
+  m_Size: {x: 0.6416626, y: 3.09686}
   m_EdgeRadius: 0
 --- !u!1 &951651436
 GameObject:
@@ -36082,6 +36076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668e87f8868910143b3cb81cedccda1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oneUse: 0
   hasAnimation: 1
   openOffset: 0
   openSpeed: 1
@@ -40080,6 +40075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668e87f8868910143b3cb81cedccda1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oneUse: 0
   hasAnimation: 1
   openOffset: 0
   openSpeed: 1
@@ -40508,7 +40504,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1498764040}
   time: 10
   target: 100
-  fadeOutTime: 0
   pingpongTime: 50
   pingpongTarget: 100
 --- !u!1 &1515597425
@@ -40543,6 +40538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668e87f8868910143b3cb81cedccda1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oneUse: 0
   hasAnimation: 1
   openOffset: 0
   openSpeed: 1
@@ -42952,7 +42948,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1692632826}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 124.71, y: -0.23, z: 0}
+  m_LocalPosition: {x: -6.26, y: -2.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -43335,6 +43331,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1716267209}
   - component: {fileID: 1716267210}
+  - component: {fileID: 1716267212}
+  - component: {fileID: 1716267211}
   m_Layer: 0
   m_Name: Camera Position
   m_TagString: Untagged
@@ -43372,6 +43370,66 @@ MonoBehaviour:
   color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   enabled: 1
   size: {x: 17.77, y: 10.03}
+--- !u!114 &1716267211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716267208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21abefbc2fb8e1049b09b987433066d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: player
+  disallowTag: 
+  oneUse: 0
+  canExitIfOneUse: 1
+  OnTriggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 519420030}
+        m_TargetAssemblyTypeName: CameraMovement, Assembly-CSharp
+        m_MethodName: MoveTo
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1716267208}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!61 &1716267212
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716267208}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.07989502, y: 0.5392947}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 15.221405, y: 9.029498}
+  m_EdgeRadius: 0
 --- !u!1 &1727895614
 GameObject:
   m_ObjectHideFlags: 0
@@ -43666,6 +43724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668e87f8868910143b3cb81cedccda1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oneUse: 0
   hasAnimation: 1
   openOffset: 0
   openSpeed: 1

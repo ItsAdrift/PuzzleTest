@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class OpeningDoor : MonoBehaviour
 {
+    public bool oneUse;
     public bool hasAnimation;
     Vector3 origin;
     public float openOffset;
     public float openSpeed = 1f;
     public Animation animation;
 
-    bool used;
+    bool used = false;
     bool closed = false;
     bool opening = false;
     Vector3 target;
@@ -35,20 +36,21 @@ public class OpeningDoor : MonoBehaviour
 
     public void SetOpen(bool b)
     {
-        if (b && !used)
+        if (b && !(oneUse && used))
         {
             if (hasAnimation)
             {
                 animation.Play();
+                used = true;
             } else
             {
                 target = transform.position;
                 target.y = transform.position.y + openOffset;
                 opening = true;
-                
+                used = true;
             }
             
-            used = true;
+            
             closed = false;
         } else
         {
@@ -92,8 +94,10 @@ public class OpeningDoor : MonoBehaviour
             animation.Stop();
         } else
         {
-            target = transform.position;
-            target.y = transform.position.y - openOffset;
+            target = origin;
+            opening = true;
+            //transform.position;
+            //target.y = transform.position.y - openOffset;
         }
 
         closed = true;

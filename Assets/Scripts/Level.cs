@@ -41,7 +41,7 @@ public class Level : MonoBehaviour
             SpriteRenderer spritRenderer = objects[i].GetComponent<SpriteRenderer>();
             Fade fade = objects[i].AddComponent<Fade>();
             fade.spriteRenderer = spritRenderer;
-            fade.time = 0.5f;
+            fade.time = 2f;
             fade.FadeOut();
 
             ObjectPickup objectPickup = FindObjectOfType<ObjectPickup>();
@@ -50,7 +50,7 @@ public class Level : MonoBehaviour
             {
                 objectPickup.pickedUpObject = null;
             }
-            Destroy(objects[i], 1);
+            Destroy(objects[i], 1.5f);
         }
 
         objectsCleared = true;

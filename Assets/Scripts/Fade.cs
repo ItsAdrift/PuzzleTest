@@ -10,9 +10,6 @@ public class Fade : MonoBehaviour
     [SerializeField] public float time;
     [SerializeField] float target;
 
-    [Header("Fade Out")]
-    [SerializeField] public float fadeOutTime;
-
     [Header("Ping Pong")]
     [SerializeField] float pingpongTime;
     [SerializeField] float pingpongTarget;
@@ -22,12 +19,6 @@ public class Fade : MonoBehaviour
     bool pingpong = false;
 
     bool fadeInOut = false;
-
-    private void Awake()
-    {
-        if (fadeOutTime == 0)
-            fadeOutTime = time;
-    }
 
     private void Update()
     {
@@ -47,7 +38,7 @@ public class Fade : MonoBehaviour
         }
         else if (fadeOut) {
             Color32 colour = spriteRenderer.color;
-            colour.a = (byte)Mathf.Lerp(colour.a, 0, fadeOutTime * Time.deltaTime);
+            colour.a = (byte)Mathf.Lerp(colour.a, 0, time * Time.deltaTime);
             spriteRenderer.color = colour;
         } else if (pingpong)
         {

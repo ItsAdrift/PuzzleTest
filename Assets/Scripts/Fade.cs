@@ -9,7 +9,10 @@ public class Fade : MonoBehaviour
     [Header("Fade In")]
     [SerializeField] public float time;
     [SerializeField] float target;
-    
+
+    [Header("Fade Out")]
+    [SerializeField] public float fadeOutTime;
+
     [Header("Ping Pong")]
     [SerializeField] float pingpongTime;
     [SerializeField] float pingpongTarget;
@@ -18,17 +21,33 @@ public class Fade : MonoBehaviour
     bool fadeOut = false;
     bool pingpong = false;
 
+    bool fadeInOut = false;
+
+    private void Awake()
+    {
+        if (fadeOutTime == 0)
+            fadeOutTime = time;
+    }
+
     private void Update()
     {
         if (fadeIn)
         {
+            Debug.Log("Check 1");
             Color32 colour = spriteRenderer.color;
             colour.a = (byte)Mathf.Lerp(colour.a, target, time * Time.deltaTime);
             spriteRenderer.color = colour;
+
+            if (colour.a == 255 && fadeInOut)
+            {
+                Debug.Log("Reached Target");
+                FadeOut();
+                fadeInOut = false;
+            }
         }
         else if (fadeOut) {
             Color32 colour = spriteRenderer.color;
-            colour.a = (byte)Mathf.Lerp(colour.a, 0, time * Time.deltaTime);
+            colour.a = (byte)Mathf.Lerp(colour.a, 0, fadeOutTime * Time.deltaTime);
             spriteRenderer.color = colour;
         } else if (pingpong)
         {
@@ -50,6 +69,19 @@ public class Fade : MonoBehaviour
         fadeIn = true;
         pingpong = false;
         fadeOut = false;
+    }
+
+    public void FadeInOut(float delay)
+    {
+        StartCoroutine(_FadeInOut(delay));
+    }
+
+    IEnumerator _FadeInOut(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        fadeInOut = true;
+        FadeIn();
     }
 
     public void PingPong()

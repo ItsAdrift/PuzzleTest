@@ -5,19 +5,32 @@ using UnityEngine;
 public class OpeningDoor : MonoBehaviour
 {
     public bool hasAnimation;
+    Vector3 origin;
     public float openOffset;
     public float openSpeed = 1f;
     public Animation animation;
 
     bool used;
-    bool closed;
+    bool closed = false;
     bool opening = false;
     Vector3 target;
+
+    private void Start()
+    {
+        origin = transform.position;
+    }
 
     public void Update()
     {
         if (opening)
+        {
+            if (transform.position == target)
+            {
+                opening = false;
+            }
             transform.position = Vector3.Lerp(transform.position, target, openSpeed * Time.deltaTime);
+        }
+            
     }
 
     public void SetOpen(bool b)
@@ -32,13 +45,15 @@ public class OpeningDoor : MonoBehaviour
                 target = transform.position;
                 target.y = transform.position.y + openOffset;
                 opening = true;
+                
             }
             
             used = true;
-        } /*else
+            closed = false;
+        } else
         {
-            animation.Rewind();
-        }*/
+            Close(0);
+        }
     }
 
     public void Close(int delay)
@@ -47,6 +62,22 @@ public class OpeningDoor : MonoBehaviour
             return;
 
         StartCoroutine(_Close(delay));
+    }
+
+    public void CloseIfOpen(int delay)
+    {
+        if (!closed)
+        {
+            if (opening)
+            {
+                opening = false;
+                transform.position = origin;
+                return;
+            } else
+                Close(delay);
+
+            used = false;
+        }
     }
 
     private IEnumerator _Close(int delay)

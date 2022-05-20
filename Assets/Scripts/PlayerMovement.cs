@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,6 +19,23 @@ public class PlayerMovement : MonoBehaviour
 
     float horizontalMove = 0f;
     bool jump = false;
+
+
+    public UnityEvent OnStart;
+    public UnityEvent OnDeath;
+
+    void Awake()
+    {
+        if (OnStart == null)
+            OnStart = new UnityEvent();
+        if (OnDeath == null)
+            OnDeath = new UnityEvent();
+    }
+
+    void Start()
+    {
+        OnStart.Invoke();
+    }
 
     void Update()
     {
@@ -41,14 +59,48 @@ public class PlayerMovement : MonoBehaviour
         jump = false;
     }
 
-    public void Respawn()
+    public void Die()
     {
+        level?.OnDeath.Invoke();
+
         Respawn(level.GetSpawnPoint());
+
+        OnDeath.Invoke();
+    }
+
+    public void Collapse()
+    {
+        int count = gfx.childCount;
+        for (int i = 0; i < count; i++)
+        {
+            Transform child = gfx.GetChild(i);
+
+            if (child.GetComponent<Rigidbody2D>() != null)
+                return;
+
+            child.gameObject.AddComponent<BoxCollider2D>();
+            Rigidbody2D rb = child.gameObject.AddComponent<Rigidbody2D>();
+            rb.velocity = controller.GetRigidbody().velocity;
+
+            if (child.name == "Head")
+            {
+                Vector2 v = rb.velocity;
+                v.y = 1;
+                rb.velocity = v;
+            }
+
+            isEnabled = false;
+        }
     }
 
     public void Respawn(Transform position)
     {
         StartCoroutine(_Respawn(position, respawnDelay));  
+    }
+
+    public void Respawn(float delay)
+    {
+        StartCoroutine(_Respawn(level.GetSpawnPoint(), delay));
     }
 
     IEnumerator _Respawn(Transform t, float delay)
@@ -86,4 +138,10 @@ public class PlayerMovement : MonoBehaviour
 
         isEnabled = true;
     }
+
+    public void SetLevel(Level level)
+    {
+        this.level = level;
+    }
+
 }

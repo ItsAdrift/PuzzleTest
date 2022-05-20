@@ -16,7 +16,7 @@ public class Laser : MonoBehaviour
     [SerializeField] LayerMask laserObstruction;
     [SerializeField] Vector2 direction;
 
-    bool active;
+    bool active = true;
 
     bool obstructed;
 
@@ -29,10 +29,18 @@ public class Laser : MonoBehaviour
 
     public void Update()
     {
+        if (!active)
+            return;
+
         lineRenderer.SetPosition(0, start.localPosition); // an issue i faced was things being out, caused by using position over localPosition
         RaycastHit2D hit = Physics2D.Raycast(start.position, direction, Vector3.Distance(start.position, end.position), laserObstruction);
         if (hit.collider != null)
         {
+            if (hit.collider.gameObject.GetComponent<BreakableObject>() != null)
+            {
+                hit.collider.GetComponent<BreakableObject>()?.Damage(1);
+            }
+
             lineRenderer.SetPosition(1, transform.InverseTransformPoint(hit.point));
             SetupEdgeCollider();
             obstructed = true;
@@ -58,31 +66,13 @@ public class Laser : MonoBehaviour
         if (collision.tag == "player")
         {
             PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
-            int count = player.gfx.childCount;
-            for (int i = 0; i < count; i++)
-            {
-                Transform child = player.gfx.GetChild(i);
-
-                if (child.GetComponent<Rigidbody2D>() != null)
-                    return;
-
-                child.gameObject.AddComponent<BoxCollider2D>();
-                Rigidbody2D rb = child.gameObject.AddComponent<Rigidbody2D>();
-                rb.velocity = player.controller.GetRigidbody().velocity;
-
-                if (child.name == "Head")
-                {
-                    Vector2 v = rb.velocity;
-                    v.y = 1;
-                    rb.velocity = v;
-                }
-
-                player.isEnabled = false;
-                player.Respawn();
-
-            }
+            player.Collapse();
+            player.Die();
         }
-            
+        else
+        {
+            //collision.GetComponent<BreakableObject>()?.Damage(1);
+        }
     }
 
     public void SetActive(bool b)
@@ -90,6 +80,12 @@ public class Laser : MonoBehaviour
         active = b;
 
         lineRenderer.enabled = b;
+        edgeCollider.enabled = b;
+    }
+
+    public void Toggle()
+    {
+        SetActive(!active);
     }
 
     public void SetupEdgeCollider()

@@ -10,6 +10,7 @@ TagManager:
   - tutorial_4_key
   - tutorial_5_key
   - level1_key
+  - level6_key
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Obstacle
   - Laser Obstruction
   - Object
-  - Bloom
+  - Damageable
   - 
   - 
   - 

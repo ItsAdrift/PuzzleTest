@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ObjectPickup : MonoBehaviour
 {
@@ -77,28 +78,7 @@ public class ObjectPickup : MonoBehaviour
             {
                 // Drop infront of the player
 
-                if (Physics2D.OverlapCircle(wallCheck.position, radius, ground))
-                    return;
-
-                if (pickedUpObject.rb != null)
-                {
-                    if (pickedUpObject.disableSimulation)
-                    {
-                        pickedUpObject.rb.simulated = true;
-                    } else
-                    {
-                        pickedUpObject.rb.bodyType = RigidbodyType2D.Dynamic;
-                    }
-                    pickedUpObject.rb.velocity = Vector2.zero;
-                }
-
-                pickedUpObject.transform.SetParent(null);
-
-                Vector3 dropPos = drop.position;
-                pickedUpObject.transform.position = dropPos;
-
-                pickedUpObject.isPickedUp = false;
-                pickedUpObject = null;
+                Drop();
 
             }
             
@@ -160,6 +140,36 @@ public class ObjectPickup : MonoBehaviour
             pickedUpObject = null;
         }
 
+    }
+
+    public void Drop()
+    {
+        if (pickedUpObject == null)
+            return;
+
+        if (Physics2D.OverlapCircle(wallCheck.position, radius, ground))
+            return;
+
+        if (pickedUpObject.rb != null)
+        {
+            if (pickedUpObject.disableSimulation)
+            {
+                pickedUpObject.rb.simulated = true;
+            }
+            else
+            {
+                pickedUpObject.rb.bodyType = RigidbodyType2D.Dynamic;
+            }
+            pickedUpObject.rb.velocity = Vector2.zero;
+        }
+
+        pickedUpObject.transform.SetParent(null);
+
+        Vector3 dropPos = drop.position;
+        pickedUpObject.transform.position = dropPos;
+
+        pickedUpObject.isPickedUp = false;
+        pickedUpObject = null;
     }
 
     public bool HasPickedUpObject()

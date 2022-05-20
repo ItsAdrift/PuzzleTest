@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Level : MonoBehaviour
 {
@@ -9,6 +10,18 @@ public class Level : MonoBehaviour
     [SerializeField] Transform spawnPoint;
 
     bool objectsCleared = false;
+
+
+    public UnityEvent OnDeath;
+    public UnityEvent OnRestart;
+
+    void Awake()
+    {
+        if (OnDeath == null)
+            OnDeath = new UnityEvent();
+        if (OnRestart == null)
+            OnRestart = new UnityEvent();
+    }
 
     public void Start()
     {
@@ -51,6 +64,11 @@ public class Level : MonoBehaviour
     public Transform GetSpawnPoint()
     {
         return spawnPoint;
+    }
+
+    public void Restart()
+    {
+        OnRestart.Invoke();
     }
 
 }

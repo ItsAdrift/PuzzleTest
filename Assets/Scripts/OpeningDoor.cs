@@ -37,7 +37,7 @@ public class OpeningDoor : MonoBehaviour
 
     public void SetOpen(bool b)
     {
-        Debug.Log(open);
+        //Debug.Log(open);
         if (b && !(oneUse && used) && !open)
         {
             if (hasAnimation)

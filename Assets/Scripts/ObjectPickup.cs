@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class ObjectPickup : MonoBehaviour
 {
+    [SerializeField] PlayerMovement player;
     [SerializeField] CharacterController2D controller;
 
     [SerializeField] Transform carry;
@@ -20,7 +21,7 @@ public class ObjectPickup : MonoBehaviour
 
     [Header("Throw")]
     [SerializeField] bool dragBack = true;
-    [SerializeField] Camera cam;
+    //[SerializeField] Camera cam;
     [SerializeField] LineTrajectory lt;
 
     [SerializeField] float power;
@@ -36,6 +37,7 @@ public class ObjectPickup : MonoBehaviour
 
     void Update()
     {
+        Camera cam = player.cam;
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (pickedUpObject == null)
@@ -62,6 +64,8 @@ public class ObjectPickup : MonoBehaviour
                                 {
                                     obj.rb.bodyType = RigidbodyType2D.Kinematic;
                                 }
+                                obj.rb.velocity = Vector2.zero;
+                                obj.rb.angularVelocity = 0;
                             }
                             
                             

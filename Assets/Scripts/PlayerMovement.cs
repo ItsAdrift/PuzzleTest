@@ -8,19 +8,26 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool isEnabled = true;
     public Level level;
 
+    [Header("Camera")]
+    public Camera mainCamera;
+    [HideInInspector] public Camera cam;
+    public enum CameraMode { NORMAL, FAR };
+    [HideInInspector] public CameraMode camMode = CameraMode.NORMAL;
+
+    [Header("Basic")]
     public CharacterController2D controller;
     public Transform gfx;
-
-    public float respawnDelay = 2f;
-    public float respawnSpeed = 2f;
-    public float respawnEnd = 1f;
-    
     public float runSpeed = 40f;
 
     float horizontalMove = 0f;
     bool jump = false;
 
+    [Header("Respawn")]
+    public float respawnDelay = 2f;
+    public float respawnSpeed = 2f;
+    public float respawnEnd = 1f;
 
+    [Header("Movement")]
     public UnityEvent OnStart;
     public UnityEvent OnDeath;
 
@@ -35,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         OnStart.Invoke();
+        cam = mainCamera;
     }
 
     void Update()
@@ -42,11 +50,29 @@ public class PlayerMovement : MonoBehaviour
         if (!isEnabled)
             return;
 
+        // Movement
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
         if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.UpArrow))
         {
             jump = true;
+        }
+
+        // Zoomed Out Camera
+        if (Input.GetKeyDown(KeyCode.Z) && level.zoomedCamera != null)
+        {
+            if (camMode == CameraMode.FAR)
+            {
+                cam = mainCamera;
+                level.zoomedCamera.SetActive(false);
+                camMode = CameraMode.NORMAL;
+            } else
+            {
+                cam = level.zoomedCamera.GetComponent<Camera>();
+                level.zoomedCamera.SetActive(true);
+                camMode = CameraMode.FAR;
+            }
+            
         }
     }
 

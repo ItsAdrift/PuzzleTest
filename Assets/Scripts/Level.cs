@@ -5,12 +5,13 @@ using UnityEngine.Events;
 
 public class Level : MonoBehaviour
 {
+    public GameObject zoomedCamera;
+
     [SerializeField] GameObject[] objects;
     [SerializeField] Trigger exitTrigger;
     [SerializeField] Transform spawnPoint;
 
     bool objectsCleared = false;
-
 
     public UnityEvent OnDeath;
     public UnityEvent OnRestart;
@@ -59,6 +60,20 @@ public class Level : MonoBehaviour
     public void TriggerExit()
     {
         ClearObjects();
+
+        if (zoomedCamera != null)
+            zoomedCamera.SetActive(false);
+
+        /*PlayerMovement player = FindObjectOfType<PlayerMovement>();
+        if (player.camMode == PlayerMovement.CameraMode.FAR)
+        {
+            if (player.level.zoomedCamera != null)
+            {
+                player.level.zoomedCamera.SetActive(true);
+            }
+            if (zoomedCamera != null)
+                zoomedCamera.SetActive(false);
+        }*/
     }
 
     public Transform GetSpawnPoint()

@@ -13,6 +13,7 @@ public class OpeningDoor : MonoBehaviour
 
     bool used = false;
     bool closed = false;
+    bool open = false;
     bool opening = false;
     Vector3 target;
 
@@ -36,17 +37,20 @@ public class OpeningDoor : MonoBehaviour
 
     public void SetOpen(bool b)
     {
-        if (b && !(oneUse && used))
+        Debug.Log(open);
+        if (b && !(oneUse && used) && !open)
         {
             if (hasAnimation)
             {
                 animation.Play();
+                open = true;
                 used = true;
             } else
             {
                 target = transform.position;
                 target.y = transform.position.y + openOffset;
                 opening = true;
+                open = true;
                 used = true;
             }
             
@@ -73,6 +77,7 @@ public class OpeningDoor : MonoBehaviour
             if (opening)
             {
                 opening = false;
+                open = false;
                 transform.position = origin;
                 return;
             } else
@@ -101,6 +106,7 @@ public class OpeningDoor : MonoBehaviour
         }
 
         closed = true;
+        open = false;
 
     }
 

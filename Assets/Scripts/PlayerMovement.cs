@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class PlayerMovement : MonoBehaviour
 {
     [HideInInspector] public bool isEnabled = true;
-    public Level level; // change this u nerd
+    public Level level;
 
     public CharacterController2D controller;
     public Transform gfx;
@@ -91,6 +91,8 @@ public class PlayerMovement : MonoBehaviour
 
             isEnabled = false;
         }
+
+        GetComponent<BoxCollider2D>().enabled = false;
     }
 
     public void Respawn(Transform position)
@@ -118,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         transform.position = t.position;
+        GetComponent<BoxCollider2D>().enabled = true;
 
         for (int i = 0; i < gfx.childCount; i++)
         {

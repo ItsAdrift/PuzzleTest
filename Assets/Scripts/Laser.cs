@@ -16,15 +16,18 @@ public class Laser : MonoBehaviour
     [SerializeField] LayerMask laserObstruction;
     [SerializeField] Vector2 direction;
 
-    bool active = true;
+    public bool active = true;
 
     bool obstructed;
 
     public void Start()
     {
-        particles = Instantiate(particlesPrefab).GetComponent<ParticleSystem>();
+        particles = Instantiate(particlesPrefab, transform).GetComponent<ParticleSystem>();
 
         SetupEdgeCollider();
+
+        if (!active)
+            SetActive(false);
     }
 
     public void Update()
@@ -81,11 +84,31 @@ public class Laser : MonoBehaviour
 
         lineRenderer.enabled = b;
         edgeCollider.enabled = b;
+
+        if (!active)
+            particles.Stop();
     }
 
     public void Toggle()
     {
         SetActive(!active);
+    }
+
+    public void Enable(float delay)
+    {
+        StartCoroutine(DelayedSetActive(true, delay));
+    }
+
+    public void Disable(float delay)
+    {
+        StartCoroutine(DelayedSetActive(false, delay));
+    }
+
+    IEnumerator DelayedSetActive(bool b, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        SetActive(b);
     }
 
     public void SetupEdgeCollider()

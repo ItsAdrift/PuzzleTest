@@ -62,7 +62,11 @@ public class Level : MonoBehaviour
         ClearObjects();
 
         if (zoomedCamera != null)
+        {
             zoomedCamera.SetActive(false);
+            FindObjectOfType<PlayerMovement>().camMode = PlayerMovement.CameraMode.NORMAL;
+        }
+            
 
         /*PlayerMovement player = FindObjectOfType<PlayerMovement>();
         if (player.camMode == PlayerMovement.CameraMode.FAR)

@@ -9,7 +9,7 @@ public class Door : MonoBehaviour
 
     void Update()
     {
-        if (!objectPickup.HasPickedUpObject())
+        if (objectPickup != null && !objectPickup.HasPickedUpObject())
         {
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), playerCollider);
         }

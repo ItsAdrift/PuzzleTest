@@ -13,7 +13,7 @@ public class OpeningDoor : MonoBehaviour
 
     bool used = false;
     bool closed = false;
-    bool open = false;
+    [HideInInspector] public bool open = false;
     bool opening = false;
     Vector3 target;
 
@@ -80,9 +80,13 @@ public class OpeningDoor : MonoBehaviour
                 open = false;
                 transform.position = origin;
                 return;
-            } else
+            } else if (open)
+            {
                 Close(delay);
+            }
+                
 
+            open = false;
             used = false;
         }
     }

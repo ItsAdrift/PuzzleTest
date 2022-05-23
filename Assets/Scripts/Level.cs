@@ -7,7 +7,7 @@ public class Level : MonoBehaviour
 {
     public GameObject zoomedCamera;
 
-    [SerializeField] GameObject[] objects;
+    [SerializeField] public GameObject[] objects;
     [SerializeField] Trigger exitTrigger;
     [SerializeField] Transform spawnPoint;
 

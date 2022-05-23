@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class Trigger : MonoBehaviour
 {
+    [SerializeField] LayerMask disallowLayer;
+
     [SerializeField] string tag;
     [SerializeField] string disallowTag;
     [SerializeField] bool oneUse;
@@ -25,6 +27,11 @@ public class Trigger : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        /*if (disallowLayer == (disallowLayer | (1 << collision.gameObject.layer)))
+        {
+            collision.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }*/
+
         if (used && oneUse)
             return;
 

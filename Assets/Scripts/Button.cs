@@ -93,4 +93,16 @@ public class Button : MonoBehaviour
         }
     }
 
+    public void Reset(float delay)
+    {
+        StartCoroutine(_Reset(delay));
+    }
+
+    IEnumerator _Reset(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        used = false;
+    }
+
 }

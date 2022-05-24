@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class Level : MonoBehaviour
 {
+    public int level;
+
     public Transform cameraPosition;
     public GameObject zoomedCamera;
 
@@ -65,7 +67,7 @@ public class Level : MonoBehaviour
         if (zoomedCamera != null)
         {
             zoomedCamera.SetActive(false);
-            FindObjectOfType<PlayerMovement>().camMode = PlayerMovement.CameraMode.NORMAL;
+            FindObjectOfType<PlayerMovement>().SetCameraMode(PlayerMovement.CameraMode.NORMAL);
         }
             
 
@@ -96,6 +98,7 @@ public class Level : MonoBehaviour
         Vector3 pos = cameraPosition.position;
         pos.z = -10;
         Camera.main.transform.position = pos;
+
         PlayerMovement player = FindObjectOfType<PlayerMovement>();
         player.level = this;
         player.transform.position = spawnPoint.position;

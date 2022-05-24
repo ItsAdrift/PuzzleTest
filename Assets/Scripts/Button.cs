@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class Button : MonoBehaviour
 {
     public Animation animation;
-    public bool oneUse = false;
+    public bool oneUse = true;
     bool used = false;
     public string tag;
 

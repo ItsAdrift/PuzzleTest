@@ -20,7 +20,7 @@ public class ObjectPickup : MonoBehaviour
     [SerializeField] Transform check;
 
     [Header("Throw")]
-    [SerializeField] bool dragBack = true;
+    [SerializeField] public bool dragBack = true;
     //[SerializeField] Camera cam;
     [SerializeField] LineTrajectory lt;
 

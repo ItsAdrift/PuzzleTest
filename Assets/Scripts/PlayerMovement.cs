@@ -47,6 +47,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            MenuManager.Instance.ActivateMenu("main");
+        }
+
         if (!isEnabled)
             return;
 
@@ -63,16 +68,28 @@ public class PlayerMovement : MonoBehaviour
         {
             if (camMode == CameraMode.FAR)
             {
-                cam = mainCamera;
-                level.zoomedCamera.SetActive(false);
-                camMode = CameraMode.NORMAL;
+                SetCameraMode(CameraMode.NORMAL);
             } else
             {
-                cam = level.zoomedCamera.GetComponent<Camera>();
-                level.zoomedCamera.SetActive(true);
-                camMode = CameraMode.FAR;
+                SetCameraMode(CameraMode.FAR);
             }
             
+        }
+    }
+
+    public void SetCameraMode(CameraMode mode)
+    {
+        if (camMode == CameraMode.FAR)
+        {
+            cam = mainCamera;
+            level.zoomedCamera.SetActive(false);
+            camMode = CameraMode.NORMAL;
+        }
+        else
+        {
+            cam = level.zoomedCamera.GetComponent<Camera>();
+            level.zoomedCamera.SetActive(true);
+            camMode = CameraMode.FAR;
         }
     }
 
@@ -171,6 +188,8 @@ public class PlayerMovement : MonoBehaviour
     public void SetLevel(Level level)
     {
         this.level = level;
+        // unlock level
+        PlayerPrefs.SetInt("level_" + level.level, level.level);
     }
 
 }

@@ -24,6 +24,8 @@ public class LevelDoor : MonoBehaviour
         Physics2D.IgnoreCollision(collider, playerCollider, openingDoor.open);
         for (int i = 0; i < level.objects.Length; i++)
         {
+            if (level.objects[i] == null)
+                return;
             Physics2D.IgnoreCollision(collider, level.objects[i].GetComponent<Collider2D>(), openingDoor.open);
         }
     }

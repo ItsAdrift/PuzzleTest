@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class Level : MonoBehaviour
 {
+    public Transform cameraPosition;
     public GameObject zoomedCamera;
 
     [SerializeField] public GameObject[] objects;
@@ -88,6 +89,16 @@ public class Level : MonoBehaviour
     public void Restart()
     {
         OnRestart.Invoke();
+    }
+
+    public void JumpTo()
+    {
+        Vector3 pos = cameraPosition.position;
+        pos.z = -10;
+        Camera.main.transform.position = pos;
+        PlayerMovement player = FindObjectOfType<PlayerMovement>();
+        player.level = this;
+        player.transform.position = spawnPoint.position;
     }
 
 }

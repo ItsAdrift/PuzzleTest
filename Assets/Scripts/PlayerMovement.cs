@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetCameraMode(CameraMode mode)
     {
-        if (camMode == CameraMode.FAR)
+        if (mode == CameraMode.NORMAL)
         {
             cam = mainCamera;
             level.zoomedCamera.SetActive(false);
@@ -189,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
     {
         this.level = level;
         // unlock level
-        PlayerPrefs.SetInt("level_" + level.level, level.level);
+        PlayerPrefs.SetInt("level_" + level.level, 1);
     }
 
 }

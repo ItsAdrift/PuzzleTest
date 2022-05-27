@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelDoor : MonoBehaviour
 {
     [SerializeField] Level level;
+    [SerializeField] bool blockObjects = false;
 
     Collider2D playerCollider;
     Collider2D collider;
@@ -22,6 +23,9 @@ public class LevelDoor : MonoBehaviour
     void Update()
     {
         Physics2D.IgnoreCollision(collider, playerCollider, openingDoor.open);
+
+        if (blockObjects)
+            return;
         for (int i = 0; i < level.objects.Length; i++)
         {
             if (level.objects[i] == null)

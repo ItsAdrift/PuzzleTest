@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -8,9 +9,29 @@ public class MenuManager : MonoBehaviour
 
     public Menu[] menus;
 
+    [Header("Titles")]
+    public Sprite defaultTitle;
+    public Sprite secondaryTitle;
+    public float secondaryTitleChance;
+    public Image[] titles;
+
     private void Awake()
     {
         Instance = this;
+    }
+
+    void Start()
+    {
+        Sprite title = defaultTitle;
+        if (secondaryTitleChance > Random.Range(0, 100))
+        {
+            title = secondaryTitle;
+        }
+
+        for (int i = 0; i < titles.Length; i++)
+        {
+            titles[i].sprite = title;
+        }    
     }
 
     public void ActivateMenu(string id)

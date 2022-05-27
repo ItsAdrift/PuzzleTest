@@ -9,9 +9,9 @@ public class LevelHolder : MonoBehaviour
     public Transform levelHolder;
     public GameObject levelPrefab;
 
-    private void Start()
+    private void OnEnable()
     {
-        Generate();
+        Regen();
     }
 
     public void Generate()

@@ -26,6 +26,7 @@ public class AudioManager : MonoBehaviour
             s.source.playOnAwake = false;
 
             s.source.clip = s.clip;
+            s.source.enabled = s.active;
 
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;

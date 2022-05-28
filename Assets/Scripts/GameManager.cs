@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
         {
             if (objectMask == (objectMask | (1 << g.layer)))
             {
-                CubeCollision c = g.AddComponent<CubeCollision>();
+                CollisionSound c = g.AddComponent<CollisionSound>();
+                c.sound = "ObjectCollision";
                 c.div = div;
                 c.min = min;
                 c.collisionMask = groundMask;

@@ -2346,7 +2346,7 @@ MonoBehaviour:
   - {fileID: 2004408205}
   defaultTitle: {fileID: 21300000, guid: 596d857f7b955b04c8cbab5532ebfcdb, type: 3}
   secondaryTitle: {fileID: 21300000, guid: d465e741a2d84344c971855549d1a2ee, type: 3}
-  secondaryTitleChance: 2.5
+  secondaryTitleChance: 5
   titles:
   - {fileID: 401995420}
   - {fileID: 2038238245}
@@ -9442,7 +9442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animation: {fileID: 226518735}
   oneUse: 0
-  tag: 
+  tag: key
   brokenParticles: {fileID: 0}
   bursts: 0
   burstRate: 0
@@ -20700,7 +20700,7 @@ GameObject:
   - component: {fileID: 541974298}
   - component: {fileID: 541974297}
   - component: {fileID: 541974296}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Key
   m_TagString: level1_key
   m_Icon: {fileID: 0}
@@ -26892,7 +26892,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.28650284, y: -0.015916824}
+  m_Offset: {x: 0.28650284, y: 1.4235997}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -26903,7 +26903,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 15.770897, y: 10.008974}
+  m_Size: {x: 15.770897, y: 7.129941}
   m_EdgeRadius: 0
 --- !u!114 &857242213
 MonoBehaviour:
@@ -34760,8 +34760,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1001745494}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.764, y: -4.5949, z: 0}
-  m_LocalScale: {x: 6.2193174, y: 1.3609068, z: 1}
+  m_LocalPosition: {x: 0.1588, y: -4.5949, z: 0}
+  m_LocalScale: {x: 18.064629, y: 1.3609068, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 913967427}
@@ -59701,7 +59701,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level 8
+  m_text: 'Level 8
+
+    This is the current end
+
+
+    GO AWAY'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8533bcb487680f4c9c44b3e753dcdce, type: 2}
   m_sharedMaterial: {fileID: -3836779820351806306, guid: e8533bcb487680f4c9c44b3e753dcdce, type: 2}
@@ -65386,7 +65391,7 @@ MonoBehaviour:
   - name: Spring
     active: 1
     clip: {fileID: 8300000, guid: 7867caa7f81b3124a81337ca0ded6ffe, type: 3}
-    volume: 1
+    volume: 0.761
     pitch: 1
     loop: 0
     source: {fileID: 0}

@@ -30,6 +30,7 @@ public class LevelUI : MonoBehaviour
         if (!unlocked)
             return;
 
+        FindObjectOfType<CameraMovement>().ClearTarget();
         level.JumpTo();
         MenuManager.Instance.DeactivateAll();
     }

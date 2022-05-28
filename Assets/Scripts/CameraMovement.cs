@@ -12,7 +12,7 @@ public class CameraMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (targetPosition.z != -10)
+        if (targetPosition == new Vector3(0, 0, 0) && targetPosition.z != -10)
             return;
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, movementSpeed * Time.fixedDeltaTime);
@@ -36,6 +36,11 @@ public class CameraMovement : MonoBehaviour
     public void FourSecondDelay(GameObject position)
     {
         DelayedMoveTo(position, 4);
+    }
+
+    public void ClearTarget()
+    {
+        targetPosition = new Vector3(0, 0, 0);
     }
 
     /**

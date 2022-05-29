@@ -11,6 +11,7 @@ TagManager:
   - tutorial_5_key
   - level1_key
   - level6_key
+  - level
   layers:
   - Default
   - TransparentFX
@@ -42,7 +43,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Level
   - Level Mask
   m_SortingLayers:
   - name: Default

@@ -20,7 +20,7 @@ public class LevelDoor : MonoBehaviour
         openingDoor = GetComponent<OpeningDoor>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Physics2D.IgnoreCollision(collider, playerCollider, openingDoor.open);
 

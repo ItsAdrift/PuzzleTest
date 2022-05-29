@@ -17,7 +17,6 @@ public class CollisionSound : MonoBehaviour
         if (collisionMask == (collisionMask | (1 << collision.gameObject.layer))) {
 
             float mag = collision.relativeVelocity.magnitude / div;
-            Debug.Log(mag);
 
             if (mag >= min)
             {

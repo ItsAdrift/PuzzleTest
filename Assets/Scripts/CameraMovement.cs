@@ -18,6 +18,16 @@ public class CameraMovement : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, targetPosition, movementSpeed * Time.fixedDeltaTime);
     }
 
+    public void MoveTo(Transform position)
+    {
+        if (locked)
+            return;
+
+        targetPosition = position.position;
+        targetPosition.z = -10;
+
+    }
+
     public void MoveTo(GameObject position)
     {
         if (locked)
@@ -27,7 +37,7 @@ public class CameraMovement : MonoBehaviour
         targetPosition.z = -10;
 
     }
-    
+
     public void DelayedMoveTo(GameObject position, float delay)
     {
         StartCoroutine(Delay(position, delay));
@@ -53,7 +63,7 @@ public class CameraMovement : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         Unlock();
-        MoveTo(position);
+        MoveTo(position.transform);
     }
 
     public void Lock()

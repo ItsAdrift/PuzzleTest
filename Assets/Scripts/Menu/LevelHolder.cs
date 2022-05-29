@@ -18,10 +18,12 @@ public class LevelHolder : MonoBehaviour
     {
         for (int i = 0; i < levelManager.levels.Length; i++)
         {
+            if (levelManager.levels[i].level <= 0)
+                continue;
             GameObject obj = Instantiate(levelPrefab, levelHolder);
             LevelUI ui = obj.GetComponent<LevelUI>();
             ui.level = levelManager.levels[i];
-            ui.levelNumber = i + 1;
+            ui.levelNumber = i -2;
             ui.Init();
         }
     }

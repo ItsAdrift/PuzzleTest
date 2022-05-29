@@ -8,6 +8,8 @@ public class ObjectPickup : MonoBehaviour
     [SerializeField] PlayerMovement player;
     [SerializeField] CharacterController2D controller;
 
+    [Header("Pickup")]
+    [SerializeField] LayerMask pickupMask;
     [SerializeField] Transform carry;
     [SerializeField] Transform drop;
 
@@ -42,9 +44,10 @@ public class ObjectPickup : MonoBehaviour
         {
             if (pickedUpObject == null)
             {
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(check.position, distance);
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(check.position, distance, pickupMask);
                 for (int i = 0; i < colliders.Length; i++)
                 {
+
                     if (colliders[i].gameObject.GetComponent<MoveableObject>() != null)
                     {
                         MoveableObject obj = colliders[i].gameObject.GetComponent<MoveableObject>();
@@ -66,10 +69,7 @@ public class ObjectPickup : MonoBehaviour
                                 }
                                 obj.rb.velocity = Vector2.zero;
                                 obj.rb.angularVelocity = 0;
-                            }
-                            
-                            
-                                
+                            }    
 
                             obj.isPickedUp = true;
 

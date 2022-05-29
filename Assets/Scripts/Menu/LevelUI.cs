@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class LevelUI : MonoBehaviour
@@ -30,9 +31,16 @@ public class LevelUI : MonoBehaviour
         if (!unlocked)
             return;
 
-        FindObjectOfType<CameraMovement>().ClearTarget();
+        CameraMovement cam = FindObjectOfType<CameraMovement>();
+        cam.ClearTarget();
+        Vector3 pos = level.cameraPosition.position;
+        pos.z = -10;
+        cam.transform.position = pos;
+
         level.JumpTo();
         MenuManager.Instance.DeactivateAll();
+
+        MainMenuController.OnLevelLoad.Invoke();
     }
 
 }

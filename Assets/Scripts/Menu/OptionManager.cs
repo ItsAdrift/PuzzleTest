@@ -23,6 +23,9 @@ public class OptionManager : MonoBehaviour
 
     private void SetDragBack(int i)
     {
+        if (objectPickup == null)
+            return;
+
         if (i == 0) // Drag back
         {
             objectPickup.dragBack = true;
@@ -36,5 +39,6 @@ public class OptionManager : MonoBehaviour
     {
         SetDragBack(throwing.value);
         PlayerPrefs.SetInt("throwing", throwing.value);
+        //Debug.Log("PlayerPrefs value = " + PlayerPrefs.GetInt("throwing"));
     }
 }

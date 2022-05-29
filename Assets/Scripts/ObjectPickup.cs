@@ -37,6 +37,17 @@ public class ObjectPickup : MonoBehaviour
 
     [HideInInspector] public MoveableObject pickedUpObject;
 
+    private void Awake()
+    {
+        MainMenuController.OnLevelLoad.AddListener(OnlevelLoad);
+    }
+
+    void OnlevelLoad()
+    {
+        //Debug.Log("Object Pickup PlayerPrefs value = " + PlayerPrefs.GetInt("throwing"));
+        dragBack = PlayerPrefs.GetInt("throwing") == 0;
+    }
+
     void Update()
     {
         Camera cam = player.cam;

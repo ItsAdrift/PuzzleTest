@@ -6,13 +6,6 @@ public class DebugManager : MonoBehaviour
 {
     public bool debug = true;
 
-    public GameObject mainMenu;
-
-    void Start()
-    {
-        mainMenu.SetActive(true);
-    }
-
     public void UnlockAllLevels()
     {
         LevelManager l = FindObjectOfType<LevelManager>();

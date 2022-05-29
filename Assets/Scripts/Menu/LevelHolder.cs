@@ -11,6 +11,7 @@ public class LevelHolder : MonoBehaviour
 
     private void OnEnable()
     {
+        levelManager = FindObjectOfType<LevelManager>();
         Regen();
     }
 

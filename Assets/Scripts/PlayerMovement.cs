@@ -49,7 +49,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            MenuManager.Instance.ActivateMenu("main");
+            if (PauseMenuManager.instance.paused)
+                PauseMenuManager.instance.Resume();
+            else
+                PauseMenuManager.instance.Pause();
         }
 
         if (!isEnabled)

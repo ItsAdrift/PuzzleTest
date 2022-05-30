@@ -195,4 +195,9 @@ public class PlayerMovement : MonoBehaviour
         PlayerPrefs.SetInt("level_" + level.level, 1);
     }
 
+    public void GoToSpawnpoint()
+    {
+        transform.position = level.GetSpawnPoint().position;
+    }
+
 }

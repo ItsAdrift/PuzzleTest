@@ -19,6 +19,13 @@ public class OptionManager : MonoBehaviour
             SetDragBack(i);
             throwing.value = i;
         }
+
+        MainMenuController.OnOptionsChange.AddListener(OnOptionsChange);
+    }
+
+    void OnOptionsChange()
+    {
+        throwing.value = PlayerPrefs.GetInt("throwing");
     }
 
     private void SetDragBack(int i)
@@ -39,6 +46,7 @@ public class OptionManager : MonoBehaviour
     {
         SetDragBack(throwing.value);
         PlayerPrefs.SetInt("throwing", throwing.value);
+        MainMenuController.OnOptionsChange.Invoke();
         //Debug.Log("PlayerPrefs value = " + PlayerPrefs.GetInt("throwing"));
     }
 }

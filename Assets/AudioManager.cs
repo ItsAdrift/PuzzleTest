@@ -56,6 +56,9 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
+        if (!s.active)
+            return;
+
         s.source.volume = volume;
         s.source.pitch = pitch;
         s.source.PlayOneShot(s.source.clip);

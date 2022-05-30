@@ -37,7 +37,7 @@ public class ObjectPickup : MonoBehaviour
 
     [HideInInspector] public MoveableObject pickedUpObject;
 
-    private void Awake()
+    private void Start()
     {
         MainMenuController.OnLevelLoad.AddListener(OnlevelLoad);
     }
@@ -45,6 +45,7 @@ public class ObjectPickup : MonoBehaviour
     void OnlevelLoad()
     {
         //Debug.Log("Object Pickup PlayerPrefs value = " + PlayerPrefs.GetInt("throwing"));
+        Debug.Log("Level Loaded");
         dragBack = PlayerPrefs.GetInt("throwing") == 0;
     }
 

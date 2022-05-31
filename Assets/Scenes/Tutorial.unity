@@ -2082,7 +2082,7 @@ GameObject:
   - component: {fileID: 106693994}
   - component: {fileID: 106693996}
   m_Layer: 0
-  m_Name: Level 8
+  m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39696,9 +39696,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You can just stand on this one.
+  m_text: 'a/d to move
 
-    Go ahead- try it'
+    Space to JUmp
+
+    E to pickup objects'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8533bcb487680f4c9c44b3e753dcdce, type: 2}
   m_sharedMaterial: {fileID: -3836779820351806306, guid: e8533bcb487680f4c9c44b3e753dcdce, type: 2}
@@ -46688,7 +46690,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

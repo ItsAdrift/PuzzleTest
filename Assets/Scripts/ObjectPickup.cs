@@ -23,7 +23,6 @@ public class ObjectPickup : MonoBehaviour
 
     [Header("Throw")]
     [SerializeField] public bool dragBack = true;
-    //[SerializeField] Camera cam;
     [SerializeField] LineTrajectory lt;
 
     [SerializeField] float power;
@@ -44,8 +43,6 @@ public class ObjectPickup : MonoBehaviour
 
     void OnlevelLoad()
     {
-        //Debug.Log("Object Pickup PlayerPrefs value = " + PlayerPrefs.GetInt("throwing"));
-        Debug.Log("Level Loaded");
         dragBack = PlayerPrefs.GetInt("throwing") == 0;
     }
 
@@ -61,39 +58,40 @@ public class ObjectPickup : MonoBehaviour
                 {
 
                     if (colliders[i].gameObject.GetComponent<MoveableObject>() != null)
-                    {
+                        return;
+                    
                         MoveableObject obj = colliders[i].gameObject.GetComponent<MoveableObject>();
-                        if (obj.canPickUp && !obj.isPickedUp)
-                        {
-                            obj.gameObject.transform.SetParent(carry);
-
-                            obj.gameObject.transform.localPosition = new Vector3(0, obj.yOffset, 0);
-
-                            if (obj.rb != null)
-                            {
-                                if (obj.disableSimulation)
-                                {
-                                    obj.rb.simulated = false;
-                                }
-                                else
-                                {
-                                    obj.rb.bodyType = RigidbodyType2D.Kinematic;
-                                }
-                                obj.rb.velocity = Vector2.zero;
-                                obj.rb.angularVelocity = 0;
-                            }    
-
-                            obj.isPickedUp = true;
-
-                            pickedUpObject = obj;
-                        }
+                    if (!obj.canPickUp || obj.isPickedUp)
                         break;
+
+
+                    obj.gameObject.transform.SetParent(carry);
+
+                    obj.gameObject.transform.localPosition = new Vector3(0, obj.yOffset, 0);
+
+                    if (obj.rb != null)
+                    {
+                        if (obj.disableSimulation)
+                        {
+                            obj.rb.simulated = false;
+                        }
+                        else
+                        {
+                            obj.rb.bodyType = RigidbodyType2D.Kinematic; // neccesary for certain picked up objects to be able to block lasers.
+                        }
+                        obj.rb.velocity = Vector2.zero; // error to do with objects keeping downward velocity & messing up the next throw
+                        obj.rb.angularVelocity = 0;
                     }
+
+                    obj.isPickedUp = true;
+
+                    pickedUpObject = obj;
+
+
                 }
             } else
             {
                 // Drop infront of the player
-
                 Drop();
 
             }
@@ -108,7 +106,6 @@ public class ObjectPickup : MonoBehaviour
         {
             startPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             startPoint.z = 15;
-            //Debug.Log(startPoint);
         }
 
         // Drag Throw

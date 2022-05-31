@@ -86,14 +86,13 @@ public class PlayerMovement : MonoBehaviour
         {
             cam = mainCamera;
             level.zoomedCamera.SetActive(false);
-            camMode = CameraMode.NORMAL;
         }
         else
         {
             cam = level.zoomedCamera.GetComponent<Camera>();
             level.zoomedCamera.SetActive(true);
-            camMode = CameraMode.FAR;
         }
+        camMode = mode;
     }
 
     void FixedUpdate()

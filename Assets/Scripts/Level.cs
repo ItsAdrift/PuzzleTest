@@ -108,7 +108,6 @@ public class Level : MonoBehaviour
 
     public void Restart()
     {
-        //Debug.Log("Restart");
         OnRestart.Invoke();
     }
 

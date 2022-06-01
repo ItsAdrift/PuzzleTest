@@ -52239,7 +52239,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1692632831}
-  controller: {fileID: 1692632828}
   pickupMask:
     serializedVersion: 2
     m_Bits: 1536

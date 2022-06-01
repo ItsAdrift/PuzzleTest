@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerPart : MonoBehaviour
 {
-    private Vector3 initalPostion;
+    // The position and rotation of each part relative to the parent this
+    // is required so that each part can go back exactly as it was.
+    private Vector3 initialPosition;
     private Quaternion initialRotation;
 
     bool returning = false;
@@ -12,19 +14,22 @@ public class PlayerPart : MonoBehaviour
 
     Vector3 temp;
 
-    // Start is called before the first frame update
     void Start()
     {
-        initalPostion = transform.localPosition;
+        // Set the initialPosition and rotation
+        initialPosition = transform.localPosition;
         initialRotation = transform.localRotation;
     }
 
     void Update()
     {
+        // Check if the player has collapsed and should be going back together
         if (!returning)
             return;
 
-        transform.localPosition = Vector3.Lerp(transform.localPosition, initalPostion, speed * Time.deltaTime);
+        // Lerp (Linearly interpoles between 2 points) between the current position and target position each frame.
+        // The creates smooth movement for each body part.
+        transform.localPosition = Vector3.Lerp(transform.localPosition, initialPosition, speed * Time.deltaTime);
         transform.localRotation = Quaternion.Lerp(transform.localRotation, initialRotation, speed * Time.deltaTime);
     }
 
@@ -39,6 +44,7 @@ public class PlayerPart : MonoBehaviour
 
     public void Cache()
     {
+        // store the current position to go back to to in Return()
         temp = transform.position;
     }
 

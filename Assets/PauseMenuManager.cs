@@ -14,19 +14,28 @@ public class PauseMenuManager : MonoBehaviour
 
     public void Pause()
     {
+        // Set the 'paused' boolean to true
         paused = true;
+        // Set Unity's 'timeScale' to 0.
         Time.timeScale = 0;
 
+        // Disable the PlayerMovement script
         FindObjectOfType<PlayerMovement>().isEnabled = false;
+        // Activate the Pause Menu
         ActivateMenu("main");
     }
 
     public void Resume()
     {
+        // Set the 'paused' boolean to false
         paused = false;
+        // Set Unity's 'timeScale' back to 1
         Time.timeScale = 1;
+
+        // Reenable the PlayerMovement Script
         FindObjectOfType<PlayerMovement>().isEnabled = true;
 
+        // Deactivate all paused-related menus
         DeactivateAll();
     }
 
@@ -45,7 +54,6 @@ public class PauseMenuManager : MonoBehaviour
     }
 
     // MenuManager Methods
-
     public void ActivateMenu(string id)
     {
         for (int i = 0; i < menus.Length; i++)

@@ -28,8 +28,6 @@ public class Laser : MonoBehaviour
 
         if (!active)
             SetActive(false);
-
-        // AudioManager.instance.Play("Laser");
     }
 
     public void Update()
@@ -59,7 +57,7 @@ public class Laser : MonoBehaviour
         } else
         {
             lineRenderer.SetPosition(1, end.localPosition);
-            if (obstructed) // make sure we don't end up setting edge collider points every frame
+            if (obstructed) // make sure I don't end up setting edge collider points every frame
             {
                 particles.gameObject.GetComponent<AudioSource>().Stop();
                 particles.Stop();
@@ -77,10 +75,6 @@ public class Laser : MonoBehaviour
             PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
             player.Collapse();
             player.Die();
-        }
-        else
-        {
-            //collision.GetComponent<BreakableObject>()?.Damage(1);
         }
     }
 

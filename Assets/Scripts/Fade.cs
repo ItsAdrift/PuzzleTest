@@ -24,14 +24,12 @@ public class Fade : MonoBehaviour
     {
         if (fadeIn)
         {
-            Debug.Log("Check 1");
             Color32 colour = spriteRenderer.color;
             colour.a = (byte)Mathf.Lerp(colour.a, target, time * Time.deltaTime);
             spriteRenderer.color = colour;
 
             if (colour.a == 255 && fadeInOut)
             {
-                Debug.Log("Reached Target");
                 FadeOut();
                 fadeInOut = false;
             }

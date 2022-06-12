@@ -100,7 +100,7 @@ public class ObjectPickup : MonoBehaviour
                     // Store the object
                     pickedUpObject = obj;
 
-
+                    return;
                 }
             } else
             {
